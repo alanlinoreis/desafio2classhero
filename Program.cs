@@ -37,12 +37,23 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Criando uma temperatura em Celsius
-        Temperatura t1 = new Temperatura(25, Escala.Celsius);
-        Console.WriteLine($"{t1} = {t1.EmFahrenheit():F2}°F");
+        Console.Write("Digite a temperatura corporal em Celsius: ");
+        if (double.TryParse(Console.ReadLine(), out double valorTemp))
+        {
+            Temperatura temp = new Temperatura(valorTemp, Escala.Celsius);
 
-        // Criando uma temperatura em Fahrenheit
-        Temperatura t2 = new Temperatura(77, Escala.Fahrenheit);
-        Console.WriteLine($"{t2} = {t2.EmCelsius():F2}°C");
+            if (temp.EmCelsius() <= 37.5)
+            {
+                Console.WriteLine("Entrada permitida.");
+            }
+            else
+            {
+                Console.WriteLine("Entrada negada por febre.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Valor inválido.");
+        }
     }
 }
